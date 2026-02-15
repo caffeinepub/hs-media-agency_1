@@ -1,0 +1,128 @@
+{
+  "kind": "build_request",
+  "title": "Marketing website for HS Media Agency with contact info and inquiry form",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a responsive marketing website for a social media marketing agency named “HS Media Agency” with clear, English-language copy and a single-page layout that includes at minimum: a hero section, a services section, an about/why-us section, and a contact section.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a website for social media marketing agency name HS Media Agency"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The site prominently displays the name “HS Media Agency” in the header/hero.",
+        "The page includes distinct sections for Hero, Services, About/Why Us, and Contact (or equivalent clearly labeled sections).",
+        "Layout is responsive and looks correct on mobile and desktop (no overlapping or cut-off content)."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Display the provided contact details in the contact section and anywhere else appropriate (e.g., header/footer): phone number +919234473077, email Teamharshsingh@gmail.com, and location Bihar.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "with contact details like number +919234473077 email Teamharshsingh@gmail.com and location bihar"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Phone number is shown exactly as “+919234473077”.",
+        "Email is shown exactly as “Teamharshsingh@gmail.com”.",
+        "Location is shown as “Bihar”.",
+        "Contact details are visible without requiring login."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Add an inquiry form that allows visitors to submit an inquiry to HS Media Agency. The form must include at least: full name, email, phone (optional), service interest (select), message, and a consent/acknowledgement checkbox; show inline validation and a success/error result state after submission.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "and give a inquiry form."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Form validates required fields (name, email, service interest, message, consent) and blocks submission until valid.",
+        "On successful submission, the UI shows a clear success confirmation and resets or disables the form appropriately.",
+        "On failure, the UI shows a clear error message without losing the user’s typed content.",
+        "Inquiry submissions are sent to the backend and persisted (at least in canister memory) with a timestamp."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement backend support for inquiry submissions in the single Motoko main actor: define an Inquiry record type, store inquiries, and expose a public method to create an inquiry (and an optional method to list inquiries for future use).",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "and give a inquiry form."
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend exposes a method that the frontend can call to submit an inquiry with the form fields.",
+        "Inquiries are stored in backend state and include a server-side timestamp.",
+        "Backend method performs basic input checks (e.g., non-empty required strings)."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Apply a cohesive, creative visual theme consistently across the site (colors, typography, spacing, and section styling) suitable for a modern marketing agency brand. Do not use a blue/purple primary palette.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A consistent theme is applied across all sections (buttons, headings, cards, backgrounds).",
+        "Primary palette is not blue/purple.",
+        "Typography hierarchy is clear (distinct heading/subheading/body styles)."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Generate required static images and render them from frontend/public/assets/generated (do not serve images via the backend). Use the images in the marketing page layout (e.g., hero and branding).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated images exist under frontend/public/assets/generated and are referenced directly by the frontend.",
+        "The images are visible in the UI (e.g., logo in header and a hero visual)."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor (all logic in the main actor file).",
+    "Do not modify files under frontend/src/components/ui or any other immutable paths; compose those components instead.",
+    "Use English for all user-facing website text."
+  ],
+  "nonGoals": [
+    "Third-party authentication or social logins.",
+    "Sending inquiries via email/SMS or integrating with external CRMs.",
+    "Real-time chat or messaging.",
+    "A multi-page CMS for editing content."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Modern minimalist logo mark and wordmark for “HS Media Agency” (hs-media-agency-logo.dim_512x512.png)",
+      "Abstract social-media/marketing themed hero illustration with clean shapes and high contrast (hs-media-agency-hero.dim_1600x900.png)"
+    ],
+    "edits": []
+  }
+}

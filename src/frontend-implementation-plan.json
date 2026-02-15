@@ -1,0 +1,183 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "HS Media Agency single-page marketing site with inquiry form",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Implement a responsive single-page marketing layout with Hero, Services, About/Why Us, and Contact sections using English copy for HS Media Agency.",
+      "acceptanceCriteria": [
+        "The site prominently displays the name “HS Media Agency” in the header/hero.",
+        "The page includes distinct sections for Hero, Services, About/Why Us, and Contact (or equivalent clearly labeled sections).",
+        "Layout is responsive and looks correct on mobile and desktop (no overlapping or cut-off content)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the app shell that renders the single-page marketing layout and wires section navigation (anchors/scroll targets) so all required sections are reachable. Use shadcn-ui components (e.g., Button/Card) to structure the marketing UI; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/marketing/MarketingPage.tsx",
+          "operation": "create",
+          "description": "Create the single-page layout component containing Hero, Services, About/Why Us, and Contact sections with clear English marketing copy and responsive section structure. Compose shadcn-ui components for section blocks/cards where appropriate; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/marketing/sections/HeroSection.tsx",
+          "operation": "create",
+          "description": "Implement the Hero section content and layout (headline, subheadline, primary CTA scrolling to Contact) for HS Media Agency. Use shadcn-ui Button for CTAs; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/marketing/sections/ServicesSection.tsx",
+          "operation": "create",
+          "description": "Implement the Services section with a responsive grid/list of service offerings relevant to a social media marketing agency. Use shadcn-ui Card (or equivalent) for service tiles; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/marketing/sections/AboutSection.tsx",
+          "operation": "create",
+          "description": "Implement the About/Why Us section with concise English copy (value props, process, differentiators) and responsive layout. Compose shadcn-ui components as needed (Card/Separator); verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/marketing/sections/ContactSection.tsx",
+          "operation": "create",
+          "description": "Implement the Contact section container that includes contact details and the inquiry form area, ensuring responsive spacing and clear headings. Use shadcn-ui components for consistent layout; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/SiteHeader.tsx",
+          "operation": "create",
+          "description": "Create a sticky/responsive header with branding (“HS Media Agency”) and navigation links to in-page sections (Hero/Services/About/Contact). Use shadcn-ui Button for nav actions on mobile if needed; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/SiteFooter.tsx",
+          "operation": "create",
+          "description": "Create a footer that repeats key navigation and contact details, maintaining consistent typography and spacing with the rest of the page. Compose shadcn-ui components if used (e.g., Separator); verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Show the provided phone, email, and location prominently in the Contact section and appropriate global areas (header/footer).",
+      "acceptanceCriteria": [
+        "Phone number is shown exactly as “+919234473077”.",
+        "Email is shown exactly as “Teamharshsingh@gmail.com”.",
+        "Location is shown as “Bihar”.",
+        "Contact details are visible without requiring login."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/marketing/content/contact.ts",
+          "operation": "create",
+          "description": "Add a single source-of-truth constant for contact details (phone “+919234473077”, email “Teamharshsingh@gmail.com”, location “Bihar”) to ensure exact rendering across header/footer/contact sections."
+        },
+        {
+          "path": "frontend/src/features/marketing/sections/ContactSection.tsx",
+          "operation": "modify",
+          "description": "Render the provided phone/email/location in the contact section using the shared constants, ensuring they are visible and readable on mobile and desktop. Use shadcn-ui typography/layout primitives as applicable (e.g., Card); verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/SiteHeader.tsx",
+          "operation": "modify",
+          "description": "Include at least one appropriate contact detail display (e.g., phone or email) in the header (responsive; may collapse on small screens) using the shared constants. Use shadcn-ui components if needed; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/SiteFooter.tsx",
+          "operation": "modify",
+          "description": "Repeat all contact details (phone, email, location) in the footer using the shared constants, ensuring exact text matches the requirement. Compose shadcn-ui components if used; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Add an inquiry form with required fields, inline validation, and success/error UI states; submit inquiries via the existing backend interface.",
+      "acceptanceCriteria": [
+        "Form validates required fields (name, email, service interest, message, consent) and blocks submission until valid.",
+        "On successful submission, the UI shows a clear success confirmation and resets or disables the form appropriately.",
+        "On failure, the UI shows a clear error message without losing the user’s typed content.",
+        "Inquiry submissions are sent to the backend and persisted (at least in canister memory) with a timestamp."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/marketing/forms/InquiryForm.tsx",
+          "operation": "create",
+          "description": "Implement the inquiry form UI with fields: full name, email, phone (optional), service interest (select), message, consent checkbox; include inline validation messages and disable/block submit until valid. Use shadcn-ui Input/Textarea/Select/Checkbox/Button components for consistent UX; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/marketing/forms/inquiryValidation.ts",
+          "operation": "create",
+          "description": "Centralize client-side validation rules (required fields, email format, consent required; phone optional) and helpers used by the InquiryForm so validation stays consistent and testable."
+        },
+        {
+          "path": "frontend/src/features/marketing/hooks/useSubmitInquiry.ts",
+          "operation": "create",
+          "description": "Create a small hook that calls the backendInterface submitInquiry method (from frontend typing in backend.d.ts) and exposes loading/success/error states for the InquiryForm. Ensure failures preserve form values and surface a clear error message."
+        },
+        {
+          "path": "frontend/src/services/backendClient.ts",
+          "operation": "create",
+          "description": "Add a frontend backend-client wrapper that provides access to the canister methods defined in frontend/src/backend.d.ts (including submitInquiry) using the project's core-infrastructure backend connection configuration. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/marketing/sections/ContactSection.tsx",
+          "operation": "modify",
+          "description": "Wire the InquiryForm into the Contact section and ensure the success/error result state is clearly visible after submission (and success resets/disables as appropriate). Use shadcn-ui Alert (or equivalent) for result messaging; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Apply a cohesive modern theme (non-blue/purple primary) with clear typography hierarchy and consistent section styling.",
+      "acceptanceCriteria": [
+        "A consistent theme is applied across all sections (buttons, headings, cards, backgrounds).",
+        "Primary palette is not blue/purple.",
+        "Typography hierarchy is clear (distinct heading/subheading/body styles)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Create global styles and theme CSS variables used by Tailwind/shadcn-ui tokens, choosing a primary palette that is not blue/purple (e.g., warm orange/amber + neutral/charcoal + subtle accent). Ensure base typography, spacing, and section background treatments are consistent site-wide."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust Tailwind/shadcn token usage if needed to align with the non-blue/purple primary palette and ensure consistent typography/spacing utilities support the marketing layout."
+        },
+        {
+          "path": "frontend/src/features/marketing/MarketingPage.tsx",
+          "operation": "modify",
+          "description": "Apply consistent section styling patterns (padding, max-width, background alternation, card styles) and clear typographic hierarchy across Hero/Services/About/Contact. Use shadcn-ui components consistently (Button/Card/Separator) without modifying immutable ui component files; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Add the required generated static images under frontend/public/assets/generated and render them in the marketing layout (logo and hero visual).",
+      "acceptanceCriteria": [
+        "Generated images exist under frontend/public/assets/generated and are referenced directly by the frontend.",
+        "The images are visible in the UI (e.g., logo in header and a hero visual)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/hs-media-agency-logo.dim_512x512.png",
+          "operation": "create",
+          "description": "Add the generated static logo image asset at the exact path frontend/public/assets/generated/hs-media-agency-logo.dim_512x512.png for direct frontend use (no backend serving)."
+        },
+        {
+          "path": "frontend/public/assets/generated/hs-media-agency-hero.dim_1600x900.png",
+          "operation": "create",
+          "description": "Add the generated static hero illustration asset at the exact path frontend/public/assets/generated/hs-media-agency-hero.dim_1600x900.png for direct frontend use (no backend serving)."
+        },
+        {
+          "path": "frontend/src/components/SiteHeader.tsx",
+          "operation": "modify",
+          "description": "Render the logo image from frontend/public/assets/generated/hs-media-agency-logo.dim_512x512.png in the header next to the “HS Media Agency” brand text; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/marketing/sections/HeroSection.tsx",
+          "operation": "modify",
+          "description": "Render the hero illustration from frontend/public/assets/generated/hs-media-agency-hero.dim_1600x900.png within the hero section layout (responsive image placement that does not overlap/cut off content); verify the component's usage instructions before implementing."
+        }
+      ]
+    }
+  ]
+}

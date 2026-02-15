@@ -1,0 +1,61 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-15T06:57:50.993Z",
+  "summary": "Most frontend requirements are implemented: a single-page responsive marketing layout with Hero/Services/About/Contact sections, consistent warm (non-blue/purple) theme tokens, contact details shown in header/footer/contact, an inquiry form with inline validation and success state, and frontend references to generated logo/hero images. Backend supports inquiry persistence and timestamps but lacks the requested basic input checks. Some extra, unrequested features (Internet Identity integration and footer attribution/UTM tracking) appear to have been added.",
+  "missing_requirements": [
+    {
+      "id": "REQ-4",
+      "requirement": "Backend method performs basic input checks (e.g., non-empty required strings) when submitting an inquiry.",
+      "reason": "The backend `submitInquiry` method stores the inquiry without validating required fields (e.g., empty `fullName`, `email`, `message`, or `consentGiven`). No checks or traps/guards are shown before persisting.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Internet Identity authentication/provider and identity-aware actor creation.",
+      "reason": "BuildRequest non-goals explicitly exclude third-party authentication/social logins; the diff adds Internet Identity hooks/provider and identity-dependent actor creation logic not requested for a public marketing/inquiry flow.",
+      "evidence": [
+        "frontend/src/hooks/useInternetIdentity.ts",
+        "frontend/src/hooks/useActor.ts",
+        "frontend/src/main.tsx"
+      ]
+    },
+    {
+      "description": "Footer attribution and UTM/appIdentifier tracking logic.",
+      "reason": "Not requested by the BuildRequest; footer includes additional attribution/marketing tracking behavior (as indicated by the file summary mentioning 'caffeine.ai attribution with UTM tracking' and code computing an appIdentifier).",
+      "evidence": [
+        "frontend/src/components/SiteFooter.tsx",
+        "frontend-file-summaries.txt"
+      ]
+    }
+  ],
+  "confidence": 0.74,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/SiteFooter.tsx",
+    "frontend/src/components/SiteHeader.tsx",
+    "frontend/src/features/marketing/MarketingPage.tsx",
+    "frontend/src/features/marketing/content/contact.ts",
+    "frontend/src/features/marketing/forms/InquiryForm.tsx",
+    "frontend/src/features/marketing/forms/inquiryValidation.ts",
+    "frontend/src/features/marketing/hooks/useSubmitInquiry.ts",
+    "frontend/src/features/marketing/sections/AboutSection.tsx",
+    "frontend/src/features/marketing/sections/ContactSection.tsx",
+    "frontend/src/features/marketing/sections/HeroSection.tsx",
+    "frontend/src/features/marketing/sections/ServicesSection.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

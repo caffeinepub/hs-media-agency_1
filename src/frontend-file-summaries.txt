@@ -1,0 +1,16 @@
+{
+  "frontend/src/App.tsx": "Main application component that renders the MarketingPage as the root view.",
+  "frontend/src/features/marketing/MarketingPage.tsx": "Single-page marketing layout component that composes the header, hero, services, about, contact sections, and footer.",
+  "frontend/src/features/marketing/sections/HeroSection.tsx": "Hero section with headline, subheadline, CTA buttons, and hero image with decorative gradient backgrounds.",
+  "frontend/src/features/marketing/sections/ServicesSection.tsx": "Services section displaying 8 service offerings in a responsive grid with icons and descriptions.",
+  "frontend/src/features/marketing/sections/AboutSection.tsx": "About/Why Us section with company description and 4 value proposition cards.",
+  "frontend/src/features/marketing/sections/ContactSection.tsx": "Contact section container with contact information card and inquiry form side-by-side.",
+  "frontend/src/features/marketing/forms/InquiryForm.tsx": "Inquiry form component with validation, loading states, success/error handling, and all required fields.",
+  "frontend/src/features/marketing/forms/inquiryValidation.ts": "Client-side validation logic for the inquiry form with comprehensive field validation rules.",
+  "frontend/src/features/marketing/hooks/useSubmitInquiry.ts": "Custom hook that handles inquiry submission to the backend with proper PhoneNumber type handling, loading, success, and error states.",
+  "frontend/src/features/marketing/content/contact.ts": "Single source of truth for contact details (phone, email, location) used across the site.",
+  "frontend/src/components/SiteHeader.tsx": "Sticky header with logo, brand name, navigation links, and mobile menu with contact phone number.",
+  "frontend/src/components/SiteFooter.tsx": "Footer with brand info, navigation links, contact details, and caffeine.ai attribution with UTM tracking.",
+  "frontend/src/index.css": "Global styles with warm amber/orange OKLCH color system for light and dark modes, avoiding blue/purple palette.",
+  "frontend/tailwind.config.js": "Tailwind configuration with custom color tokens, Inter font family, and extended design system utilities."
+}
